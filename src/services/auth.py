@@ -12,6 +12,8 @@ from src.services.users import UserService
 from src.database.models import User
 from src.cache.cache_decorator import redis_cache
 from pydantic import EmailStr
+from src.database.models import UserRole
+
 
 class Hash:
     pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -89,6 +91,14 @@ async def get_current_user(
     return user
 
 
+def get_current_admin_user(current_user: User = Depends(get_current_user)):
+    if current_user.role != UserRole.ADMIN:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN, detail="Insufficient access rights"
+        )
+    return current_user
+
+
 def create_email_token(data: dict):
     to_encode = data.copy()
     expire = datetime.now(UTC) + timedelta(days=7)
@@ -130,10 +140,11 @@ async def verify_refresh_token(refresh_token: str, db: Session):
     except JWTError:
         return None
 
+
 async def generate_reset_token(email: EmailStr):
     payload = {
         "email": email,
         "exp": datetime.now() + timedelta(minutes=30),
-        "scope": "password_reset"
+        "scope": "password_reset",
     }
     return jwt.encode(payload, settings.JWT_SECRET, algorithm=settings.JWT_ALGORITHM)

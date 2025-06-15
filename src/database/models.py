@@ -1,9 +1,10 @@
 from typing import Optional
 from sqlalchemy.orm import Mapped, mapped_column, DeclarativeBase, relationship
-from sqlalchemy import Column, String, Integer, Boolean, func
+from sqlalchemy import Column, String, Integer, Boolean, func, Enum as SqlEnum
 from sqlalchemy.sql.schema import ForeignKey
 from sqlalchemy.sql.sqltypes import DateTime
 from datetime import date
+from enum import Enum
 
 
 class Base(DeclarativeBase):
@@ -25,6 +26,11 @@ class Contact(Base):
     user = relationship("User", backref="contacts")
 
 
+class UserRole(str, Enum):
+    USER = "user"
+    ADMIN = "admin"
+
+
 class User(Base):
     __tablename__ = "users"
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -35,3 +41,6 @@ class User(Base):
     username: Mapped[str] = mapped_column(String, unique=True)
     confirmed: Mapped[bool] = mapped_column(Boolean, default=False)
     created_at: Mapped[date] = mapped_column(DateTime, default=func.now())
+    role: Mapped[UserRole] = mapped_column(
+        SqlEnum(UserRole), default=UserRole.USER, nullable=False
+    )
