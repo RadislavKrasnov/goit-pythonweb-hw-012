@@ -21,6 +21,18 @@ limiter = Limiter(key_func=get_remote_address)
 )
 @limiter.limit("10/minute")
 async def me(request: Request, user: User = Depends(get_current_user)):
+    """
+    Retrieve the currently authenticated user's profile.
+
+    This endpoint is rate-limited to 10 requests per minute.
+
+    Args:
+        request (Request): The incoming HTTP request.
+        user (User): The authenticated user, extracted from the JWT token.
+
+    Returns:
+        User: The current user's profile data.
+    """
     return user
 
 
@@ -30,6 +42,19 @@ async def update_avatar_user(
     user: User = Depends(get_current_admin_user),
     db: AsyncSession = Depends(get_db),
 ):
+    """
+    Update the avatar image of the currently authenticated admin user.
+
+    The uploaded file is sent to the cloud service, and the new avatar URL is stored in the database.
+
+    Args:
+        file (UploadFile): The avatar image to upload.
+        user (User): The authenticated admin user.
+        db (AsyncSession): Database session.
+
+    Returns:
+        User: Updated user object with the new avatar URL.
+    """
     avatar_url = UploadFileService(
         settings.CLD_NAME, settings.CLD_API_KEY, settings.CLD_API_SECRET
     ).upload_file(file, user.username)

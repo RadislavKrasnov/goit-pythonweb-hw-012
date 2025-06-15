@@ -33,6 +33,21 @@ async def register_user(
     request: Request,
     db: Session = Depends(get_db),
 ):
+    """
+    Register a new user and send an email verification link.
+
+    Args:
+        user_data (UserCreate): User registration information.
+        background_tasks (BackgroundTasks): Background task handler to send emails.
+        request (Request): HTTP request object for URL generation.
+        db (Session): SQLAlchemy session for database interaction.
+
+    Returns:
+        User: The newly created user object.
+
+    Raises:
+        HTTPException: If email or username is already in use.
+    """
     user_service = UserService(db)
 
     email_user = await user_service.get_user_by_email(user_data.email)
@@ -60,6 +75,19 @@ async def register_user(
 async def login_user(
     form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)
 ):
+    """
+    Authenticate a user and issue access and refresh tokens.
+
+    Args:
+        form_data (OAuth2PasswordRequestForm): User credentials from form.
+        db (Session): SQLAlchemy session for database interaction.
+
+    Returns:
+        Token: Access and refresh tokens for the authenticated user.
+
+    Raises:
+        HTTPException: If credentials are invalid or email is unverified.
+    """
     user_service = UserService(db)
     user = await user_service.get_user_by_username(form_data.username)
     if not user or not Hash().verify_password(form_data.password, user.hashed_password):
@@ -88,6 +116,19 @@ async def login_user(
 
 @router.get("/confirmed_email/{token}")
 async def confirmed_email(token: str, db: Session = Depends(get_db)):
+    """
+    Confirm a user's email address using a verification token.
+
+    Args:
+        token (str): Email confirmation token.
+        db (Session): SQLAlchemy session for database interaction.
+
+    Returns:
+        dict: Confirmation message.
+
+    Raises:
+        HTTPException: If the token is invalid or user does not exist.
+    """
     email = await get_email_from_token(token)
     user_service = UserService(db)
     user = await user_service.get_user_by_email(email)
@@ -108,6 +149,18 @@ async def request_email(
     request: Request,
     db: Session = Depends(get_db),
 ):
+    """
+    Send a new email verification link.
+
+    Args:
+        body (RequestEmail): Email address of the user.
+        background_tasks (BackgroundTasks): Background task handler.
+        request (Request): HTTP request for base URL.
+        db (Session): SQLAlchemy session for database interaction.
+
+    Returns:
+        dict: Message indicating result.
+    """
     user_service = UserService(db)
     user = await user_service.get_user_by_email(body.email)
 
@@ -122,6 +175,19 @@ async def request_email(
 
 @router.post("/refresh-token", response_model=Token)
 async def new_token(request: TokenRefreshRequest, db: Session = Depends(get_db)):
+    """
+    Generate a new access token using a refresh token.
+
+    Args:
+        request (TokenRefreshRequest): Request containing the refresh token.
+        db (Session): SQLAlchemy session for database interaction.
+
+    Returns:
+        Token: New access token and the same refresh token.
+
+    Raises:
+        HTTPException: If the refresh token is invalid or expired.
+    """
     user = await verify_refresh_token(request.refresh_token, db)
     if user is None:
         raise HTTPException(
@@ -143,6 +209,21 @@ async def reset_password_request(
     request: Request,
     db: Session = Depends(get_db),
 ):
+    """
+    Initiate a password reset process by sending a reset link via email.
+
+    Args:
+        body (RequestEmail): User's email address.
+        background_tasks (BackgroundTasks): Background task handler.
+        request (Request): HTTP request for base URL.
+        db (Session): SQLAlchemy session for database interaction.
+
+    Returns:
+        dict: Confirmation message.
+
+    Raises:
+        HTTPException: If the user is not found.
+    """
     user_service = UserService(db)
     user = await user_service.get_user_by_email(body.email)
 
@@ -160,6 +241,19 @@ async def reset_password_request(
 
 @router.post("/reset-password")
 async def reset_password(body: ResetPasswordRequest, db: Session = Depends(get_db)):
+    """
+    Reset a user's password using a valid reset token.
+
+    Args:
+        body (ResetPasswordRequest): Contains the reset token and new password.
+        db (Session): SQLAlchemy session for database interaction.
+
+    Returns:
+        dict: Success message.
+
+    Raises:
+        HTTPException: If the token is invalid or the user does not exist.
+    """
     try:
         payload = jwt.decode(
             body.token, settings.JWT_SECRET, algorithms=[settings.JWT_ALGORITHM]

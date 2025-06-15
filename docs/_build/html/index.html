@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Contacts API documentation &#8212; Contacts API  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css?v=279e0f84" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">Contacts API  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Contacts API documentation</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="contacts-api-documentation">
+<h1>Contacts API documentation<a class="headerlink" href="#contacts-api-documentation" title="Link to this heading">¶</a></h1>
+<p>Add your content using <code class="docutils literal notranslate"><span class="pre">reStructuredText</span></code> syntax. See the
+<a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html">reStructuredText</a>
+documentation for details.</p>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="module-src.api.auth">
+<span id="rest-api-api-auth"></span><h1>REST API api Auth<a class="headerlink" href="#module-src.api.auth" title="Link to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.api.auth.confirmed_email">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.api.auth.</span></span><span class="sig-name descname"><span class="pre">confirmed_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.api.auth.confirmed_email" title="Link to this definition">¶</a></dt>
+<dd><p>Confirm a user’s email address using a verification token.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>token (str): Email confirmation token.
+db (Session): SQLAlchemy session for database interaction.</p>
+</dd>
+<dt>Returns:</dt><dd><p>dict: Confirmation message.</p>
+</dd>
+<dt>Raises:</dt><dd><p>HTTPException: If the token is invalid or user does not exist.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.api.auth.login_user">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.api.auth.</span></span><span class="sig-name descname"><span class="pre">login_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">OAuth2PasswordRequestForm</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(NoneType)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.api.auth.login_user" title="Link to this definition">¶</a></dt>
+<dd><p>Authenticate a user and issue access and refresh tokens.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>form_data (OAuth2PasswordRequestForm): User credentials from form.
+db (Session): SQLAlchemy session for database interaction.</p>
+</dd>
+<dt>Returns:</dt><dd><p>Token: Access and refresh tokens for the authenticated user.</p>
+</dd>
+<dt>Raises:</dt><dd><p>HTTPException: If credentials are invalid or email is unverified.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.api.auth.new_token">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.api.auth.</span></span><span class="sig-name descname"><span class="pre">new_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">TokenRefreshRequest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.api.auth.new_token" title="Link to this definition">¶</a></dt>
+<dd><p>Generate a new access token using a refresh token.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>request (TokenRefreshRequest): Request containing the refresh token.
+db (Session): SQLAlchemy session for database interaction.</p>
+</dd>
+<dt>Returns:</dt><dd><p>Token: New access token and the same refresh token.</p>
+</dd>
+<dt>Raises:</dt><dd><p>HTTPException: If the refresh token is invalid or expired.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.api.auth.register_user">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.api.auth.</span></span><span class="sig-name descname"><span class="pre">register_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">UserCreate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">background_tasks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BackgroundTasks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.api.auth.register_user" title="Link to this definition">¶</a></dt>
+<dd><p>Register a new user and send an email verification link.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>user_data (UserCreate): User registration information.
+background_tasks (BackgroundTasks): Background task handler to send emails.
+request (Request): HTTP request object for URL generation.
+db (Session): SQLAlchemy session for database interaction.</p>
+</dd>
+<dt>Returns:</dt><dd><p>User: The newly created user object.</p>
+</dd>
+<dt>Raises:</dt><dd><p>HTTPException: If email or username is already in use.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.api.auth.request_email">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.api.auth.</span></span><span class="sig-name descname"><span class="pre">request_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">RequestEmail</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">background_tasks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BackgroundTasks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.api.auth.request_email" title="Link to this definition">¶</a></dt>
+<dd><p>Send a new email verification link.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>body (RequestEmail): Email address of the user.
+background_tasks (BackgroundTasks): Background task handler.
+request (Request): HTTP request for base URL.
+db (Session): SQLAlchemy session for database interaction.</p>
+</dd>
+<dt>Returns:</dt><dd><p>dict: Message indicating result.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.api.auth.reset_password">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.api.auth.</span></span><span class="sig-name descname"><span class="pre">reset_password</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ResetPasswordRequest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.api.auth.reset_password" title="Link to this definition">¶</a></dt>
+<dd><p>Reset a user’s password using a valid reset token.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>body (ResetPasswordRequest): Contains the reset token and new password.
+db (Session): SQLAlchemy session for database interaction.</p>
+</dd>
+<dt>Returns:</dt><dd><p>dict: Success message.</p>
+</dd>
+<dt>Raises:</dt><dd><p>HTTPException: If the token is invalid or the user does not exist.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.api.auth.reset_password_request">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.api.auth.</span></span><span class="sig-name descname"><span class="pre">reset_password_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">RequestEmail</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">background_tasks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BackgroundTasks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.api.auth.reset_password_request" title="Link to this definition">¶</a></dt>
+<dd><p>Initiate a password reset process by sending a reset link via email.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>body (RequestEmail): User’s email address.
+background_tasks (BackgroundTasks): Background task handler.
+request (Request): HTTP request for base URL.
+db (Session): SQLAlchemy session for database interaction.</p>
+</dd>
+<dt>Returns:</dt><dd><p>dict: Confirmation message.</p>
+</dd>
+<dt>Raises:</dt><dd><p>HTTPException: If the user is not found.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-src.api.contants">
+<span id="rest-api-api-contacts"></span><h1>REST API api Contacts<a class="headerlink" href="#module-src.api.contants" title="Link to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.api.contants.create_contact">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.api.contants.</span></span><span class="sig-name descname"><span class="pre">create_contact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ContactModel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AsyncSession</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">User</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_current_user)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.api.contants.create_contact" title="Link to this definition">¶</a></dt>
+<dd><p>Create a new contact for the authenticated user.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>body (ContactModel): Contact data to create.
+db (AsyncSession): Database session.
+user (User): Currently authenticated user.</p>
+</dd>
+<dt>Returns:</dt><dd><p>ContactResponse: The created contact.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.api.contants.delete_contact">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.api.contants.</span></span><span class="sig-name descname"><span class="pre">delete_contact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contact_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AsyncSession</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">User</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_current_user)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.api.contants.delete_contact" title="Link to this definition">¶</a></dt>
+<dd><p>Delete a contact by ID.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>contact_id (int): ID of the contact to delete.
+db (AsyncSession): Database session.
+user (User): Currently authenticated user.</p>
+</dd>
+<dt>Returns:</dt><dd><p>ContactResponse: The deleted contact.</p>
+</dd>
+<dt>Raises:</dt><dd><p>HTTPException: If contact is not found.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.api.contants.read_contact">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.api.contants.</span></span><span class="sig-name descname"><span class="pre">read_contact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contact_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AsyncSession</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">User</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_current_user)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.api.contants.read_contact" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieve a specific contact by ID.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>contact_id (int): ID of the contact to retrieve.
+db (AsyncSession): Database session.
+user (User): Currently authenticated user.</p>
+</dd>
+<dt>Returns:</dt><dd><p>ContactResponse: Contact details.</p>
+</dd>
+<dt>Raises:</dt><dd><p>HTTPException: If contact is not found.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.api.contants.read_contacts">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.api.contants.</span></span><span class="sig-name descname"><span class="pre">read_contacts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AsyncSession</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">User</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_current_user)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.api.contants.read_contacts" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieve a list of contacts for the authenticated user.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>skip (int): Number of records to skip.
+limit (int): Maximum number of contacts to return.
+db (AsyncSession): Database session.
+user (User): Currently authenticated user.</p>
+</dd>
+<dt>Returns:</dt><dd><p>List[ContactResponse]: List of user’s contacts.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.api.contants.search_contacts">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.api.contants.</span></span><span class="sig-name descname"><span class="pre">search_contacts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">first_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">EmailStr</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AsyncSession</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">User</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_current_user)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.api.contants.search_contacts" title="Link to this definition">¶</a></dt>
+<dd><p>Search contacts by first name, last name, or email.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>first_name (Optional[str]): First name to search for.
+last_name (Optional[str]): Last name to search for.
+email (Optional[EmailStr]): Email to search for.
+db (AsyncSession): Database session.
+user (User): Currently authenticated user.</p>
+</dd>
+<dt>Returns:</dt><dd><p>List[ContactResponse]: List of contacts matching the search criteria.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.api.contants.upcoming_birthdays">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.api.contants.</span></span><span class="sig-name descname"><span class="pre">upcoming_birthdays</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AsyncSession</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">User</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_current_user)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.api.contants.upcoming_birthdays" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieve contacts with upcoming birthdays within the next 7 days.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>db (AsyncSession): Database session.
+user (User): Currently authenticated user.</p>
+</dd>
+<dt>Returns:</dt><dd><p>List[ContactResponse]: Contacts with upcoming birthdays.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.api.contants.update_contact">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.api.contants.</span></span><span class="sig-name descname"><span class="pre">update_contact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contact_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ContactModel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AsyncSession</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">User</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_current_user)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.api.contants.update_contact" title="Link to this definition">¶</a></dt>
+<dd><p>Update an existing contact by ID.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>contact_id (int): ID of the contact to update.
+body (ContactModel): Updated contact data.
+db (AsyncSession): Database session.
+user (User): Currently authenticated user.</p>
+</dd>
+<dt>Returns:</dt><dd><p>ContactResponse: The updated contact.</p>
+</dd>
+<dt>Raises:</dt><dd><p>HTTPException: If contact is not found.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-src.api.users">
+<span id="rest-api-api-users"></span><h1>REST API api Users<a class="headerlink" href="#module-src.api.users" title="Link to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.api.users.me">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.api.users.</span></span><span class="sig-name descname"><span class="pre">me</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">User</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_current_user)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.api.users.me" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieve the currently authenticated user’s profile.</p>
+<p>This endpoint is rate-limited to 10 requests per minute.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>request (Request): The incoming HTTP request.
+user (User): The authenticated user, extracted from the JWT token.</p>
+</dd>
+<dt>Returns:</dt><dd><p>User: The current user’s profile data.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.api.users.update_avatar_user">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.api.users.</span></span><span class="sig-name descname"><span class="pre">update_avatar_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">UploadFile</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">File(PydanticUndefined)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">User</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_current_admin_user)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AsyncSession</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.api.users.update_avatar_user" title="Link to this definition">¶</a></dt>
+<dd><p>Update the avatar image of the currently authenticated admin user.</p>
+<p>The uploaded file is sent to the cloud service, and the new avatar URL is stored in the database.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>file (UploadFile): The avatar image to upload.
+user (User): The authenticated admin user.
+db (AsyncSession): Database session.</p>
+</dd>
+<dt>Returns:</dt><dd><p>User: Updated user object with the new avatar URL.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-src.api.utils">
+<span id="rest-api-api-utils"></span><h1>REST API api Utils<a class="headerlink" href="#module-src.api.utils" title="Link to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.api.utils.healthchecker">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.api.utils.</span></span><span class="sig-name descname"><span class="pre">healthchecker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AsyncSession</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.api.utils.healthchecker" title="Link to this definition">¶</a></dt>
+<dd><p>Health check endpoint to verify database connectivity.</p>
+<p>This endpoint runs a simple SQL query (<cite>SELECT 1</cite>) against the database
+to confirm that the database connection is properly configured and accessible.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>db (AsyncSession, optional): Asynchronous database session injected via FastAPI dependency.</p>
+</dd>
+<dt>Returns:</dt><dd><p>dict: A JSON response with a welcome message if the database is reachable.</p>
+</dd>
+<dt>Raises:</dt><dd><dl class="simple">
+<dt>HTTPException: Raises a 500 Internal Server Error if the database query fails</dt><dd><p>or the database is not configured correctly.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-src.repository.contacts">
+<span id="rest-api-repository-contacts"></span><h1>REST API repository Contacts<a class="headerlink" href="#module-src.repository.contacts" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.repository.contacts.ContactRepository">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.repository.contacts.</span></span><span class="sig-name descname"><span class="pre">ContactRepository</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AsyncSession</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.repository.contacts.ContactRepository" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Repository for managing Contact entities in the database.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.repository.contacts.ContactRepository.create_contact">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create_contact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ContactModel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">User</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Contact</span></span></span><a class="headerlink" href="#src.repository.contacts.ContactRepository.create_contact" title="Link to this definition">¶</a></dt>
+<dd><p>Creates a new contact for the authenticated user.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>body (ContactModel): Contact data.
+user (User): The authenticated user.</p>
+</dd>
+<dt>Returns:</dt><dd><p>Contact: The created contact instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.repository.contacts.ContactRepository.delete_contact">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delete_contact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contact_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">User</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Contact</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#src.repository.contacts.ContactRepository.delete_contact" title="Link to this definition">¶</a></dt>
+<dd><p>Deletes a contact for the authenticated user.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>contact_id (int): Contact ID.
+user (User): The authenticated user.</p>
+</dd>
+<dt>Returns:</dt><dd><p>Optional[Contact]: The deleted contact, or None if not found.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.repository.contacts.ContactRepository.get_contact_by_id">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_contact_by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contact_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">User</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Contact</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#src.repository.contacts.ContactRepository.get_contact_by_id" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves a contact by ID for the authenticated user.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>contact_id (int): Contact ID.
+user (User): The authenticated user.</p>
+</dd>
+<dt>Returns:</dt><dd><p>Optional[Contact]: The contact if found, else None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.repository.contacts.ContactRepository.get_contacts">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_contacts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">User</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Contact</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#src.repository.contacts.ContactRepository.get_contacts" title="Link to this definition">¶</a></dt>
+<dd><p>Returns a paginated list of the user’s contacts.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>skip (int): Number of contacts to skip.
+limit (int): Maximum number of contacts to return.
+user (User): The authenticated user.</p>
+</dd>
+<dt>Returns:</dt><dd><p>List[Contact]: List of contact instances.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.repository.contacts.ContactRepository.get_upcoming_birthdays">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_upcoming_birthdays</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">User</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Contact</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#src.repository.contacts.ContactRepository.get_upcoming_birthdays" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves contacts with birthdays in the next 7 days.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>user (User): The authenticated user.</p>
+</dd>
+<dt>Returns:</dt><dd><p>List[Contact]: List of contacts with upcoming birthdays.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.repository.contacts.ContactRepository.search_contacts">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">search_contacts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">User</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">EmailStr</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Contact</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#src.repository.contacts.ContactRepository.search_contacts" title="Link to this definition">¶</a></dt>
+<dd><p>Searches for contacts based on first name, last name, or email.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>user (User): The authenticated user.
+first_name (Optional[str], optional): First name query. Defaults to None.
+last_name (Optional[str], optional): Last name query. Defaults to None.
+email (Optional[EmailStr], optional): Email query. Defaults to None.</p>
+</dd>
+<dt>Returns:</dt><dd><p>List[Contact]: List of matching contacts.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.repository.contacts.ContactRepository.update_contact">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update_contact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contact_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ContactModel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">User</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Contact</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#src.repository.contacts.ContactRepository.update_contact" title="Link to this definition">¶</a></dt>
+<dd><p>Updates an existing contact for the authenticated user.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>contact_id (int): Contact ID.
+body (ContactModel): Updated contact data.
+user (User): The authenticated user.</p>
+</dd>
+<dt>Returns:</dt><dd><p>Optional[Contact]: The updated contact, or None if not found.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src.repository.users">
+<span id="rest-api-repository-users"></span><h1>REST API repository Users<a class="headerlink" href="#module-src.repository.users" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.repository.users.UserRepository">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.repository.users.</span></span><span class="sig-name descname"><span class="pre">UserRepository</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AsyncSession</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.repository.users.UserRepository" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Repository class for handling User database operations.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.repository.users.UserRepository.confirmed_email">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">confirmed_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#src.repository.users.UserRepository.confirmed_email" title="Link to this definition">¶</a></dt>
+<dd><p>Marks a user’s email as confirmed.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>email (str): The email address of the user to confirm.</p>
+</dd>
+<dt>Returns:</dt><dd><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.repository.users.UserRepository.create_user">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">UserCreate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">avatar</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">User</span></span></span><a class="headerlink" href="#src.repository.users.UserRepository.create_user" title="Link to this definition">¶</a></dt>
+<dd><p>Creates a new user.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>body (UserCreate): The data for creating a new user.
+avatar (str, optional): The URL of the user’s avatar. Defaults to None.</p>
+</dd>
+<dt>Returns:</dt><dd><p>User: The created user instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.repository.users.UserRepository.get_user_by_email">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_user_by_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">User</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#src.repository.users.UserRepository.get_user_by_email" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves a user by their email.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>email (str): The email address of the user.</p>
+</dd>
+<dt>Returns:</dt><dd><p>User | None: The user instance if found, otherwise None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.repository.users.UserRepository.get_user_by_id">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_user_by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">User</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#src.repository.users.UserRepository.get_user_by_id" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves a user by their ID.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>user_id (int): The ID of the user to retrieve.</p>
+</dd>
+<dt>Returns:</dt><dd><p>User | None: The user instance if found, otherwise None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.repository.users.UserRepository.get_user_by_username">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_user_by_username</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">User</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#src.repository.users.UserRepository.get_user_by_username" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves a user by their username.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>username (str): The username of the user to retrieve.</p>
+</dd>
+<dt>Returns:</dt><dd><p>User | None: The user instance if found, otherwise None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.repository.users.UserRepository.reset_password">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">reset_password</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.repository.users.UserRepository.reset_password" title="Link to this definition">¶</a></dt>
+<dd><p>Resets a user’s password.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>email (str): The email of the user.
+new_password (str): The new hashed password to set.</p>
+</dd>
+<dt>Returns:</dt><dd><p>User: The updated user instance with the new password.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.repository.users.UserRepository.update_avatar_url">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update_avatar_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">User</span></span></span><a class="headerlink" href="#src.repository.users.UserRepository.update_avatar_url" title="Link to this definition">¶</a></dt>
+<dd><p>Updates the avatar URL of a user.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>email (str): The email of the user.
+url (str): The new avatar URL.</p>
+</dd>
+<dt>Returns:</dt><dd><p>User: The updated user instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src.services.auth">
+<span id="rest-api-service-auth"></span><h1>REST API service Auth<a class="headerlink" href="#module-src.services.auth" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.services.auth.Hash">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.auth.</span></span><span class="sig-name descname"><span class="pre">Hash</span></span><a class="headerlink" href="#src.services.auth.Hash" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Utility class for hashing and verifying passwords using bcrypt.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.services.auth.Hash.get_password_hash">
+<span class="sig-name descname"><span class="pre">get_password_hash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.auth.Hash.get_password_hash" title="Link to this definition">¶</a></dt>
+<dd><p>Hashes a plain password.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>password (str): The password to hash.</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: The hashed password.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.services.auth.Hash.pwd_context">
+<span class="sig-name descname"><span class="pre">pwd_context</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;CryptContext&gt;</span></em><a class="headerlink" href="#src.services.auth.Hash.pwd_context" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.services.auth.Hash.verify_password">
+<span class="sig-name descname"><span class="pre">verify_password</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plain_password</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hashed_password</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.auth.Hash.verify_password" title="Link to this definition">¶</a></dt>
+<dd><p>Verifies a plain password against its hashed version.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>plain_password (str): The plaintext password.
+hashed_password (str): The hashed password.</p>
+</dd>
+<dt>Returns:</dt><dd><p>bool: True if the password matches, False otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.auth.create_access_token">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.auth.</span></span><span class="sig-name descname"><span class="pre">create_access_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expires_delta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.auth.create_access_token" title="Link to this definition">¶</a></dt>
+<dd><p>Creates an access token.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data (dict): Data to include in the token.
+expires_delta (Optional[float], optional): Optional expiration override. Defaults to settings.</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: JWT access token.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.auth.create_email_token">
+<span class="sig-prename descclassname"><span class="pre">src.services.auth.</span></span><span class="sig-name descname"><span class="pre">create_email_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.auth.create_email_token" title="Link to this definition">¶</a></dt>
+<dd><p>Creates a JWT token for email confirmation.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data (dict): Data to encode.</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: Encoded email confirmation token.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.auth.create_refresh_token">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.auth.</span></span><span class="sig-name descname"><span class="pre">create_refresh_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expires_delta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.auth.create_refresh_token" title="Link to this definition">¶</a></dt>
+<dd><p>Creates a refresh token.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data (dict): Data to include in the token.
+expires_delta (Optional[float], optional): Optional expiration override. Defaults to settings.</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: JWT refresh token.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.auth.create_token">
+<span class="sig-prename descclassname"><span class="pre">src.services.auth.</span></span><span class="sig-name descname"><span class="pre">create_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expires_delta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">timedelta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'access'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'refresh'</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.auth.create_token" title="Link to this definition">¶</a></dt>
+<dd><p>Creates a JWT token.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data (dict): Data to encode in the token.
+expires_delta (timedelta): Token expiration duration.
+token_type (Literal[“access”, “refresh”]): The type of token being created.</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: Encoded JWT token.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.auth.generate_reset_token">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.auth.</span></span><span class="sig-name descname"><span class="pre">generate_reset_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">EmailStr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.auth.generate_reset_token" title="Link to this definition">¶</a></dt>
+<dd><p>Generates a token for resetting a user’s password.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>email (EmailStr): Email of the user requesting the reset.</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: Encoded reset token.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.auth.get_current_admin_user">
+<span class="sig-prename descclassname"><span class="pre">src.services.auth.</span></span><span class="sig-name descname"><span class="pre">get_current_admin_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">current_user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">User</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_current_user)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.auth.get_current_admin_user" title="Link to this definition">¶</a></dt>
+<dd><p>Ensures the current user is an admin.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>current_user (User): The currently authenticated user.</p>
+</dd>
+<dt>Raises:</dt><dd><p>HTTPException: If user is not an admin.</p>
+</dd>
+<dt>Returns:</dt><dd><p>User: The admin user.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.auth.get_current_user">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.auth.</span></span><span class="sig-name descname"><span class="pre">get_current_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(OAuth2PasswordBearer)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.auth.get_current_user" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves the current user from the token, using caching.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>token (str): JWT token from OAuth2.
+db (Session): SQLAlchemy database session.</p>
+</dd>
+<dt>Raises:</dt><dd><p>HTTPException: If the token is invalid or user not found.</p>
+</dd>
+<dt>Returns:</dt><dd><p>User: Authenticated user.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.auth.get_email_from_token">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.auth.</span></span><span class="sig-name descname"><span class="pre">get_email_from_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.auth.get_email_from_token" title="Link to this definition">¶</a></dt>
+<dd><p>Extracts email from a confirmation token.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>token (str): Email confirmation token.</p>
+</dd>
+<dt>Raises:</dt><dd><p>HTTPException: If token is invalid or expired.</p>
+</dd>
+<dt>Returns:</dt><dd><p>EmailStr: Email extracted from token.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.auth.user_cache_key">
+<span class="sig-prename descclassname"><span class="pre">src.services.auth.</span></span><span class="sig-name descname"><span class="pre">user_cache_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.auth.user_cache_key" title="Link to this definition">¶</a></dt>
+<dd><p>Builds a cache key based on the JWT token.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>token (str): The JWT token.</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: The cache key.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.auth.verify_refresh_token">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.auth.</span></span><span class="sig-name descname"><span class="pre">verify_refresh_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">refresh_token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.auth.verify_refresh_token" title="Link to this definition">¶</a></dt>
+<dd><p>Verifies and returns a user from a refresh token.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>refresh_token (str): The refresh token to verify.
+db (Session): SQLAlchemy session.</p>
+</dd>
+<dt>Returns:</dt><dd><p>Optional[User]: The user if valid, otherwise None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-src.services.contacts">
+<span id="rest-api-service-contacts"></span><h1>REST API service Contacts<a class="headerlink" href="#module-src.services.contacts" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.services.contacts.ContactService">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.contacts.</span></span><span class="sig-name descname"><span class="pre">ContactService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AsyncSession</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.contacts.ContactService" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Service layer for managing contact operations.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.services.contacts.ContactService.create_contact">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create_contact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ContactModel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">User</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.contacts.ContactService.create_contact" title="Link to this definition">¶</a></dt>
+<dd><p>Create a new contact for the given user.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>body (ContactModel): The contact data to create.
+user (User): The owner of the contact.</p>
+</dd>
+<dt>Returns:</dt><dd><p>Contact: The created contact instance.</p>
+</dd>
+<dt>Raises:</dt><dd><p>HTTPException: If a database integrity error occurs.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.services.contacts.ContactService.delete_contact">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delete_contact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contact_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">User</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.contacts.ContactService.delete_contact" title="Link to this definition">¶</a></dt>
+<dd><p>Delete a contact by ID.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>contact_id (int): The contact’s unique identifier.
+user (User): The owner of the contact.</p>
+</dd>
+<dt>Returns:</dt><dd><p>Contact | None: The deleted contact if it existed, otherwise None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.services.contacts.ContactService.get_contact">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_contact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contact_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">User</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.contacts.ContactService.get_contact" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieve a contact by its ID.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>contact_id (int): The contact’s unique identifier.
+user (User): The owner of the contact.</p>
+</dd>
+<dt>Returns:</dt><dd><p>Contact | None: The contact if found, otherwise None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.services.contacts.ContactService.get_contacts">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_contacts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">User</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.contacts.ContactService.get_contacts" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieve a list of contacts with pagination.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>skip (int): Number of records to skip.
+limit (int): Maximum number of records to return.
+user (User): The owner of the contacts.</p>
+</dd>
+<dt>Returns:</dt><dd><p>List[Contact]: List of contact records.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.services.contacts.ContactService.get_upcoming_birthdays">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_upcoming_birthdays</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">User</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.contacts.ContactService.get_upcoming_birthdays" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieve contacts with upcoming birthdays.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>user (User): The owner of the contacts.</p>
+</dd>
+<dt>Returns:</dt><dd><p>List[Contact]: List of contacts with birthdays soon.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.services.contacts.ContactService.search_contacts">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">search_contacts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">User</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">EmailStr</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.contacts.ContactService.search_contacts" title="Link to this definition">¶</a></dt>
+<dd><p>Search for contacts based on first name, last name, or email.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>user (User): The owner of the contacts.
+first_name (Optional[str], optional): Filter by first name.
+last_name (Optional[str], optional): Filter by last name.
+email (Optional[EmailStr], optional): Filter by email.</p>
+</dd>
+<dt>Returns:</dt><dd><p>List[Contact]: List of matched contacts.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.services.contacts.ContactService.update_contact">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update_contact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contact_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ContactModel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">User</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.contacts.ContactService.update_contact" title="Link to this definition">¶</a></dt>
+<dd><p>Update an existing contact’s information.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>contact_id (int): The ID of the contact to update.
+body (ContactModel): The updated contact data.
+user (User): The owner of the contact.</p>
+</dd>
+<dt>Returns:</dt><dd><p>Contact: The updated contact instance.</p>
+</dd>
+<dt>Raises:</dt><dd><p>HTTPException: If a database integrity error occurs.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src.services.email">
+<span id="rest-api-service-email"></span><h1>REST API service Email<a class="headerlink" href="#module-src.services.email" title="Link to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.email.send_email">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.email.</span></span><span class="sig-name descname"><span class="pre">send_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">EmailStr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.email.send_email" title="Link to this definition">¶</a></dt>
+<dd><p>Send a verification email with a token for confirming user registration.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>email (EmailStr): Recipient’s email address.
+username (str): Username to include in the template.
+host (str): Host URL for verification link.</p>
+</dd>
+<dt>Returns:</dt><dd><p>None</p>
+</dd>
+<dt>Raises:</dt><dd><p>Prints error if connection to email server fails.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.services.email.send_password_reset_email">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.email.</span></span><span class="sig-name descname"><span class="pre">send_password_reset_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">EmailStr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.email.send_password_reset_email" title="Link to this definition">¶</a></dt>
+<dd><p>Send a password reset email containing a reset token.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>email (EmailStr): Recipient’s email address.
+token (str): Password reset token to embed in the template.
+host (str): Host URL for the reset link.</p>
+</dd>
+<dt>Returns:</dt><dd><p>None</p>
+</dd>
+<dt>Raises:</dt><dd><p>Prints error if connection to email server fails.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-src.services.upload_file">
+<span id="rest-api-service-upload-file"></span><h1>REST API service Upload file<a class="headerlink" href="#module-src.services.upload_file" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.services.upload_file.UploadFileService">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.upload_file.</span></span><span class="sig-name descname"><span class="pre">UploadFileService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cloud_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_secret</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.upload_file.UploadFileService" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Service for uploading files to Cloudinary and generating image URLs.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.services.upload_file.UploadFileService.upload_file">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">upload_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#src.services.upload_file.UploadFileService.upload_file" title="Link to this definition">¶</a></dt>
+<dd><p>Upload a file to Cloudinary and return a resized image URL.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>file: File object with a <cite>.file</cite> attribute (e.g., FastAPI’s UploadFile).
+username (str): Username used to create a unique public ID.</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: URL of the uploaded image, resized to 250x250 pixels.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src.services.users">
+<span id="rest-api-service-users"></span><h1>REST API service Users<a class="headerlink" href="#module-src.services.users" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.services.users.UserService">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.services.users.</span></span><span class="sig-name descname"><span class="pre">UserService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AsyncSession</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.users.UserService" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Service class for user-related operations.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.services.users.UserService.confirmed_email">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">confirmed_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.users.UserService.confirmed_email" title="Link to this definition">¶</a></dt>
+<dd><p>Mark a user’s email as confirmed.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>email (str): The user’s email to confirm.</p>
+</dd>
+<dt>Returns:</dt><dd><p>User: The updated user instance with confirmed email.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.services.users.UserService.create_user">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">UserCreate</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.users.UserService.create_user" title="Link to this definition">¶</a></dt>
+<dd><p>Create a new user and assign a Gravatar avatar if available.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>body (UserCreate): Pydantic schema containing user creation data.</p>
+</dd>
+<dt>Returns:</dt><dd><p>User: The created user instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.services.users.UserService.get_user_by_email">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_user_by_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.users.UserService.get_user_by_email" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieve a user by their email address.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>email (str): The email to search for.</p>
+</dd>
+<dt>Returns:</dt><dd><p>User | None: The user if found, otherwise None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.services.users.UserService.get_user_by_id">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_user_by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.users.UserService.get_user_by_id" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieve a user by their ID.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>user_id (int): The ID of the user.</p>
+</dd>
+<dt>Returns:</dt><dd><p>User | None: The user if found, otherwise None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.services.users.UserService.get_user_by_username">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_user_by_username</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.users.UserService.get_user_by_username" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieve a user by their username.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>username (str): The username to search for.</p>
+</dd>
+<dt>Returns:</dt><dd><p>User | None: The user if found, otherwise None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.services.users.UserService.reset_password">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">reset_password</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.users.UserService.reset_password" title="Link to this definition">¶</a></dt>
+<dd><p>Reset a user’s password.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>email (str): The user’s email.
+new_password (str): The new password.</p>
+</dd>
+<dt>Returns:</dt><dd><p>User: The updated user instance with new password.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.services.users.UserService.update_avatar_url">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update_avatar_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.services.users.UserService.update_avatar_url" title="Link to this definition">¶</a></dt>
+<dd><p>Update the avatar URL for a user.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>email (str): The user’s email.
+url (str): The new avatar URL.</p>
+</dd>
+<dt>Returns:</dt><dd><p>User: The updated user instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src.cache.cache_decorator">
+<span id="rest-api-redis-cache"></span><h1>REST API Redis cache<a class="headerlink" href="#module-src.cache.cache_decorator" title="Link to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.cache.cache_decorator.redis_cache">
+<span class="sig-prename descclassname"><span class="pre">src.cache.cache_decorator.</span></span><span class="sig-name descname"><span class="pre">redis_cache</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key_builder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expire</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">300</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.cache.cache_decorator.redis_cache" title="Link to this definition">¶</a></dt>
+<dd><p>Decorator for caching the result of an asynchronous function in Redis.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>key_builder (Callable[…, str]): A function that generates a Redis key from the target function’s arguments.
+expire (int, optional): Time-to-live (TTL) for the cache in seconds. Defaults to 300 seconds.</p>
+</dd>
+<dt>Returns:</dt><dd><p>Callable: A decorator that wraps the target asynchronous function with Redis caching.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="#">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Contacts API documentation</a></li>
+<li><a class="reference internal" href="#module-src.api.auth">REST API api Auth</a><ul>
+<li><a class="reference internal" href="#src.api.auth.confirmed_email"><code class="docutils literal notranslate"><span class="pre">confirmed_email()</span></code></a></li>
+<li><a class="reference internal" href="#src.api.auth.login_user"><code class="docutils literal notranslate"><span class="pre">login_user()</span></code></a></li>
+<li><a class="reference internal" href="#src.api.auth.new_token"><code class="docutils literal notranslate"><span class="pre">new_token()</span></code></a></li>
+<li><a class="reference internal" href="#src.api.auth.register_user"><code class="docutils literal notranslate"><span class="pre">register_user()</span></code></a></li>
+<li><a class="reference internal" href="#src.api.auth.request_email"><code class="docutils literal notranslate"><span class="pre">request_email()</span></code></a></li>
+<li><a class="reference internal" href="#src.api.auth.reset_password"><code class="docutils literal notranslate"><span class="pre">reset_password()</span></code></a></li>
+<li><a class="reference internal" href="#src.api.auth.reset_password_request"><code class="docutils literal notranslate"><span class="pre">reset_password_request()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.api.contants">REST API api Contacts</a><ul>
+<li><a class="reference internal" href="#src.api.contants.create_contact"><code class="docutils literal notranslate"><span class="pre">create_contact()</span></code></a></li>
+<li><a class="reference internal" href="#src.api.contants.delete_contact"><code class="docutils literal notranslate"><span class="pre">delete_contact()</span></code></a></li>
+<li><a class="reference internal" href="#src.api.contants.read_contact"><code class="docutils literal notranslate"><span class="pre">read_contact()</span></code></a></li>
+<li><a class="reference internal" href="#src.api.contants.read_contacts"><code class="docutils literal notranslate"><span class="pre">read_contacts()</span></code></a></li>
+<li><a class="reference internal" href="#src.api.contants.search_contacts"><code class="docutils literal notranslate"><span class="pre">search_contacts()</span></code></a></li>
+<li><a class="reference internal" href="#src.api.contants.upcoming_birthdays"><code class="docutils literal notranslate"><span class="pre">upcoming_birthdays()</span></code></a></li>
+<li><a class="reference internal" href="#src.api.contants.update_contact"><code class="docutils literal notranslate"><span class="pre">update_contact()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.api.users">REST API api Users</a><ul>
+<li><a class="reference internal" href="#src.api.users.me"><code class="docutils literal notranslate"><span class="pre">me()</span></code></a></li>
+<li><a class="reference internal" href="#src.api.users.update_avatar_user"><code class="docutils literal notranslate"><span class="pre">update_avatar_user()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.api.utils">REST API api Utils</a><ul>
+<li><a class="reference internal" href="#src.api.utils.healthchecker"><code class="docutils literal notranslate"><span class="pre">healthchecker()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.repository.contacts">REST API repository Contacts</a><ul>
+<li><a class="reference internal" href="#src.repository.contacts.ContactRepository"><code class="docutils literal notranslate"><span class="pre">ContactRepository</span></code></a><ul>
+<li><a class="reference internal" href="#src.repository.contacts.ContactRepository.create_contact"><code class="docutils literal notranslate"><span class="pre">ContactRepository.create_contact()</span></code></a></li>
+<li><a class="reference internal" href="#src.repository.contacts.ContactRepository.delete_contact"><code class="docutils literal notranslate"><span class="pre">ContactRepository.delete_contact()</span></code></a></li>
+<li><a class="reference internal" href="#src.repository.contacts.ContactRepository.get_contact_by_id"><code class="docutils literal notranslate"><span class="pre">ContactRepository.get_contact_by_id()</span></code></a></li>
+<li><a class="reference internal" href="#src.repository.contacts.ContactRepository.get_contacts"><code class="docutils literal notranslate"><span class="pre">ContactRepository.get_contacts()</span></code></a></li>
+<li><a class="reference internal" href="#src.repository.contacts.ContactRepository.get_upcoming_birthdays"><code class="docutils literal notranslate"><span class="pre">ContactRepository.get_upcoming_birthdays()</span></code></a></li>
+<li><a class="reference internal" href="#src.repository.contacts.ContactRepository.search_contacts"><code class="docutils literal notranslate"><span class="pre">ContactRepository.search_contacts()</span></code></a></li>
+<li><a class="reference internal" href="#src.repository.contacts.ContactRepository.update_contact"><code class="docutils literal notranslate"><span class="pre">ContactRepository.update_contact()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.repository.users">REST API repository Users</a><ul>
+<li><a class="reference internal" href="#src.repository.users.UserRepository"><code class="docutils literal notranslate"><span class="pre">UserRepository</span></code></a><ul>
+<li><a class="reference internal" href="#src.repository.users.UserRepository.confirmed_email"><code class="docutils literal notranslate"><span class="pre">UserRepository.confirmed_email()</span></code></a></li>
+<li><a class="reference internal" href="#src.repository.users.UserRepository.create_user"><code class="docutils literal notranslate"><span class="pre">UserRepository.create_user()</span></code></a></li>
+<li><a class="reference internal" href="#src.repository.users.UserRepository.get_user_by_email"><code class="docutils literal notranslate"><span class="pre">UserRepository.get_user_by_email()</span></code></a></li>
+<li><a class="reference internal" href="#src.repository.users.UserRepository.get_user_by_id"><code class="docutils literal notranslate"><span class="pre">UserRepository.get_user_by_id()</span></code></a></li>
+<li><a class="reference internal" href="#src.repository.users.UserRepository.get_user_by_username"><code class="docutils literal notranslate"><span class="pre">UserRepository.get_user_by_username()</span></code></a></li>
+<li><a class="reference internal" href="#src.repository.users.UserRepository.reset_password"><code class="docutils literal notranslate"><span class="pre">UserRepository.reset_password()</span></code></a></li>
+<li><a class="reference internal" href="#src.repository.users.UserRepository.update_avatar_url"><code class="docutils literal notranslate"><span class="pre">UserRepository.update_avatar_url()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.services.auth">REST API service Auth</a><ul>
+<li><a class="reference internal" href="#src.services.auth.Hash"><code class="docutils literal notranslate"><span class="pre">Hash</span></code></a><ul>
+<li><a class="reference internal" href="#src.services.auth.Hash.get_password_hash"><code class="docutils literal notranslate"><span class="pre">Hash.get_password_hash()</span></code></a></li>
+<li><a class="reference internal" href="#src.services.auth.Hash.pwd_context"><code class="docutils literal notranslate"><span class="pre">Hash.pwd_context</span></code></a></li>
+<li><a class="reference internal" href="#src.services.auth.Hash.verify_password"><code class="docutils literal notranslate"><span class="pre">Hash.verify_password()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#src.services.auth.create_access_token"><code class="docutils literal notranslate"><span class="pre">create_access_token()</span></code></a></li>
+<li><a class="reference internal" href="#src.services.auth.create_email_token"><code class="docutils literal notranslate"><span class="pre">create_email_token()</span></code></a></li>
+<li><a class="reference internal" href="#src.services.auth.create_refresh_token"><code class="docutils literal notranslate"><span class="pre">create_refresh_token()</span></code></a></li>
+<li><a class="reference internal" href="#src.services.auth.create_token"><code class="docutils literal notranslate"><span class="pre">create_token()</span></code></a></li>
+<li><a class="reference internal" href="#src.services.auth.generate_reset_token"><code class="docutils literal notranslate"><span class="pre">generate_reset_token()</span></code></a></li>
+<li><a class="reference internal" href="#src.services.auth.get_current_admin_user"><code class="docutils literal notranslate"><span class="pre">get_current_admin_user()</span></code></a></li>
+<li><a class="reference internal" href="#src.services.auth.get_current_user"><code class="docutils literal notranslate"><span class="pre">get_current_user()</span></code></a></li>
+<li><a class="reference internal" href="#src.services.auth.get_email_from_token"><code class="docutils literal notranslate"><span class="pre">get_email_from_token()</span></code></a></li>
+<li><a class="reference internal" href="#src.services.auth.user_cache_key"><code class="docutils literal notranslate"><span class="pre">user_cache_key()</span></code></a></li>
+<li><a class="reference internal" href="#src.services.auth.verify_refresh_token"><code class="docutils literal notranslate"><span class="pre">verify_refresh_token()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.services.contacts">REST API service Contacts</a><ul>
+<li><a class="reference internal" href="#src.services.contacts.ContactService"><code class="docutils literal notranslate"><span class="pre">ContactService</span></code></a><ul>
+<li><a class="reference internal" href="#src.services.contacts.ContactService.create_contact"><code class="docutils literal notranslate"><span class="pre">ContactService.create_contact()</span></code></a></li>
+<li><a class="reference internal" href="#src.services.contacts.ContactService.delete_contact"><code class="docutils literal notranslate"><span class="pre">ContactService.delete_contact()</span></code></a></li>
+<li><a class="reference internal" href="#src.services.contacts.ContactService.get_contact"><code class="docutils literal notranslate"><span class="pre">ContactService.get_contact()</span></code></a></li>
+<li><a class="reference internal" href="#src.services.contacts.ContactService.get_contacts"><code class="docutils literal notranslate"><span class="pre">ContactService.get_contacts()</span></code></a></li>
+<li><a class="reference internal" href="#src.services.contacts.ContactService.get_upcoming_birthdays"><code class="docutils literal notranslate"><span class="pre">ContactService.get_upcoming_birthdays()</span></code></a></li>
+<li><a class="reference internal" href="#src.services.contacts.ContactService.search_contacts"><code class="docutils literal notranslate"><span class="pre">ContactService.search_contacts()</span></code></a></li>
+<li><a class="reference internal" href="#src.services.contacts.ContactService.update_contact"><code class="docutils literal notranslate"><span class="pre">ContactService.update_contact()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.services.email">REST API service Email</a><ul>
+<li><a class="reference internal" href="#src.services.email.send_email"><code class="docutils literal notranslate"><span class="pre">send_email()</span></code></a></li>
+<li><a class="reference internal" href="#src.services.email.send_password_reset_email"><code class="docutils literal notranslate"><span class="pre">send_password_reset_email()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.services.upload_file">REST API service Upload file</a><ul>
+<li><a class="reference internal" href="#src.services.upload_file.UploadFileService"><code class="docutils literal notranslate"><span class="pre">UploadFileService</span></code></a><ul>
+<li><a class="reference internal" href="#src.services.upload_file.UploadFileService.upload_file"><code class="docutils literal notranslate"><span class="pre">UploadFileService.upload_file()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.services.users">REST API service Users</a><ul>
+<li><a class="reference internal" href="#src.services.users.UserService"><code class="docutils literal notranslate"><span class="pre">UserService</span></code></a><ul>
+<li><a class="reference internal" href="#src.services.users.UserService.confirmed_email"><code class="docutils literal notranslate"><span class="pre">UserService.confirmed_email()</span></code></a></li>
+<li><a class="reference internal" href="#src.services.users.UserService.create_user"><code class="docutils literal notranslate"><span class="pre">UserService.create_user()</span></code></a></li>
+<li><a class="reference internal" href="#src.services.users.UserService.get_user_by_email"><code class="docutils literal notranslate"><span class="pre">UserService.get_user_by_email()</span></code></a></li>
+<li><a class="reference internal" href="#src.services.users.UserService.get_user_by_id"><code class="docutils literal notranslate"><span class="pre">UserService.get_user_by_id()</span></code></a></li>
+<li><a class="reference internal" href="#src.services.users.UserService.get_user_by_username"><code class="docutils literal notranslate"><span class="pre">UserService.get_user_by_username()</span></code></a></li>
+<li><a class="reference internal" href="#src.services.users.UserService.reset_password"><code class="docutils literal notranslate"><span class="pre">UserService.reset_password()</span></code></a></li>
+<li><a class="reference internal" href="#src.services.users.UserService.update_avatar_url"><code class="docutils literal notranslate"><span class="pre">UserService.update_avatar_url()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.cache.cache_decorator">REST API Redis cache</a><ul>
+<li><a class="reference internal" href="#src.cache.cache_decorator.redis_cache"><code class="docutils literal notranslate"><span class="pre">redis_cache()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">Contacts API  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Contacts API documentation</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025, Radyslav Krasnov.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    </div>
+  </body>
+</html>
