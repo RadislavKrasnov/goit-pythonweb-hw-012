@@ -1,5 +1,5 @@
 import pytest
-from jose import jwt, JWTError
+from jose import jwt
 from fastapi import HTTPException, status
 from unittest.mock import AsyncMock, MagicMock
 from src.services.auth import generate_reset_token
@@ -12,7 +12,7 @@ from src.services.auth import (
     get_email_from_token,
     verify_refresh_token,
 )
-from src.database.models import User, UserRole
+from src.database.models import User
 from src.conf.config import settings
 from datetime import timedelta
 

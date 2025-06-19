@@ -1,9 +1,8 @@
 import pytest
-from unittest.mock import AsyncMock, patch
+from unittest.mock import AsyncMock
 from sqlalchemy.exc import IntegrityError
 from src.services.contacts import ContactService
 from src.schemas import ContactModel
-from src.database.models import User
 from tests.unit.conftest import mock_session, user
 from datetime import date
 

@@ -11,4 +11,4 @@ def mock_session():
 
 @pytest.fixture
 def user():
-    return User(id=1, username="testuser")
+    return User(id=1, username="testuser", email="test@example.com", avatar="url")
