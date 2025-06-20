@@ -2,25 +2,12 @@ import pytest
 from unittest.mock import AsyncMock
 from sqlalchemy.exc import IntegrityError
 from src.services.contacts import ContactService
-from src.schemas import ContactModel
-from tests.unit.conftest import mock_session, user
-from datetime import date
+from tests.unit.conftest import mock_session, user, contact_data
 
 
 @pytest.fixture
 def contact_service(mock_session):
     return ContactService(mock_session)
-
-
-@pytest.fixture
-def contact_data():
-    return ContactModel(
-        first_name="John",
-        last_name="Doe",
-        email="john.doe@example.com",
-        phone_number="12345678900",
-        birthday=date.today(),
-    )
 
 
 @pytest.mark.asyncio
