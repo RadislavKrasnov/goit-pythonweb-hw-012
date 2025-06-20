@@ -224,7 +224,7 @@ async def get_email_from_token(token: str):
     except JWTError as e:
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail="Невірний токен для перевірки електронної пошти",
+            detail="Invalid token for email verification",
         )
 
 
