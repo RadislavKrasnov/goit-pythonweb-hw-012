@@ -1,7 +1,7 @@
 import pytest
 from jose import jwt
 from fastapi import HTTPException, status
-from unittest.mock import AsyncMock, MagicMock
+from unittest.mock import AsyncMock, MagicMock, patch
 from src.services.auth import generate_reset_token
 from src.services.auth import (
     Hash,
@@ -11,10 +11,13 @@ from src.services.auth import (
     create_email_token,
     get_email_from_token,
     verify_refresh_token,
+    get_current_user,
+    get_current_admin_user,
 )
-from src.database.models import User
+from src.database.models import User, UserRole
 from src.conf.config import settings
 from datetime import timedelta
+from tests.unit.conftest import mock_session, user
 
 
 def test_hash_password_and_verify():
@@ -131,3 +134,38 @@ async def test_generate_reset_token_contains_email():
     )
     assert decoded["email"] == "user@example.com"
     assert decoded["scope"] == "password_reset"
+
+
+@pytest.mark.asyncio
+@patch("src.services.auth.UserService")
+@patch("src.services.auth.jwt.decode")
+async def test_get_current_user_success(
+    mock_jwt_decode, mock_user_service_class, mock_session, user
+):
+    mock_jwt_decode.return_value = {"sub": "testuser"}
+
+    mock_user_service = AsyncMock()
+    mock_user_service.get_user_by_username.return_value = user
+    mock_user_service_class.return_value = mock_user_service
+
+    token = jwt.encode(
+        {"sub": "testuser"}, settings.JWT_SECRET, algorithm=settings.JWT_ALGORITHM
+    )
+    user = await get_current_user(token=token, db=mock_session)
+
+    assert user.username == "testuser"
+
+
+def test_get_current_admin_user_success(user):
+    user.role = UserRole.ADMIN
+    result = get_current_admin_user(current_user=user)
+    assert result == user
+
+
+def test_get_current_admin_user_forbidden(user):
+    user.role = UserRole.USER
+
+    with pytest.raises(HTTPException) as exc:
+        get_current_admin_user(current_user=user)
+
+    assert exc.value.status_code == status.HTTP_403_FORBIDDEN
