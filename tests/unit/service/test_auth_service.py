@@ -137,11 +137,14 @@ async def test_generate_reset_token_contains_email():
 
 
 @pytest.mark.asyncio
+@patch("src.cache.cache_decorator.redis_client.set", new_callable=AsyncMock)
+@patch("src.cache.cache_decorator.redis_client.get", new_callable=AsyncMock)
 @patch("src.services.auth.UserService")
 @patch("src.services.auth.jwt.decode")
 async def test_get_current_user_success(
-    mock_jwt_decode, mock_user_service_class, mock_session, user
+    mock_jwt_decode, mock_user_service_class, mock_get, mock_set, mock_session, user
 ):
+    mock_get.return_value = None
     mock_jwt_decode.return_value = {"sub": "testuser"}
 
     mock_user_service = AsyncMock()
