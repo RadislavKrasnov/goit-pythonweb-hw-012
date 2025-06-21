@@ -1,6 +1,5 @@
 import pytest
 from unittest.mock import patch, AsyncMock
-from fastapi import status
 from io import BytesIO
 from src.database.models import UserRole
 from src.database.models import User

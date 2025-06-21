@@ -5,9 +5,9 @@ from fastapi.testclient import TestClient
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 from sqlalchemy.pool import NullPool
 from main import app
-from src.database.models import Base, User
+from src.database.models import Base
 from src.database.db import get_db
-from src.services.auth import create_access_token, Hash
+from src.services.auth import create_access_token
 from src.conf.config import settings
 
 
