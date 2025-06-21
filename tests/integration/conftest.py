@@ -18,9 +18,9 @@ TestingSessionLocal = async_sessionmaker(
 )
 
 test_user = {
-    "username": "testuser",
-    "email": "testuser@example.com",
-    "password": "password123",
+    "username": "agent007",
+    "email": "agent007@gmail.com",
+    "password": "12345678",
 }
 
 
@@ -43,3 +43,9 @@ def client():
     app.dependency_overrides[get_db] = override_get_db
     with TestClient(app) as c:
         yield c
+
+
+@pytest_asyncio.fixture()
+async def get_token():
+    token = await create_access_token(data={"sub": test_user["username"]})
+    return token
