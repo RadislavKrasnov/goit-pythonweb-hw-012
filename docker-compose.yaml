@@ -10,32 +10,17 @@ services:
       - ./:/app
     ports:
       - "8000:8000"
-    stdin_open: true
-    tty: true
-    command: tail -f /dev/null
-    entrypoint: >
-      sh -c "pip install --upgrade pip &&
-             pip install --upgrade setuptools &&
-             tail -f /dev/null"
-  # app:
-  #   image: python:3.12
-  #   container_name: app
-  #   working_dir: /app
-  #   restart: always
-  #   volumes:
-  #     - ./:/app
-  #   ports:
-  #     - "8000:8000"
-  #     - "587:587"
-  #   depends_on:
-  #     - db
-  #   command: >
-  #     sh -c "
-  #       pip install --upgrade pip &&
-  #       pip install -r requirements.txt &&
-  #       alembic upgrade head &&
-  #       python main.py
-  #     "
+      - "587:587"
+    depends_on:
+      - db
+      - redis
+    command: >
+      sh -c "
+        pip install --upgrade pip &&
+        pip install -r requirements.txt &&
+        alembic upgrade head &&
+        python main.py
+      "
 
   db:
     image: postgres:15
